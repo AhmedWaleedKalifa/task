@@ -21,7 +21,7 @@ import ejbs.Calculation;
 @Stateful
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Path("/calc")
+@Path("app")
 public class CalculationService{
 	@PersistenceContext(unitName="hello")
 	private EntityManager em;
@@ -29,7 +29,7 @@ public class CalculationService{
 @EJB
 Calculation c;
 @POST
-
+@Path("/calc")
 public float calculate(Calculation c1) {
 	
 	em.persist(c1);
@@ -49,6 +49,7 @@ public float calculate(Calculation c1) {
 	return result;
 }
 @GET
+@Path("/calculation")
 public List<Calculation> getCalculation() {
 	String simpleQuery="SELECT num1,num2,operation FROM Calculation";
 	Query query=em.createQuery(simpleQuery);
